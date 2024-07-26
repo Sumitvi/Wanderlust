@@ -1,0 +1,104 @@
+<% layout("./layouts/boilerplate.ejs") %>
+<link rel="stylesheet" href=".../public/css/style.css">
+<style>
+
+.container{
+    flex: 1;
+}
+
+.navbar{
+  height: 5rem;    
+  background-color: white;
+}
+
+
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+.foot{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   background-color: #ebebeb;
+   flex-wrap: wrap;
+   /* gap: 57row; */
+   
+}
+.links a{
+    text-decoration: none;
+    color: #222222;
+}
+
+.links a :hover{
+    text-decoration: underline;
+    
+}
+
+.btn{
+    background-color:  #fe424d !important;
+}
+</style>
+
+<body>
+    <div class="row">
+        <div class="col-8 offset-2">
+    
+    <h2>Edit Your Listing</h2>
+
+    <form method="POST" action="/listings/<%= listingdata.id  %>?_method=PUT"  novalidate class="needs-validation" enctype="multipart/form-data">
+        <div>
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title"  class="form-control" value="<%= listingdata.title  %>" >
+
+
+        </div>
+      
+        <div class="mb-2">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" class="form-control" required><%= listingdata.description  %></textarea>
+        </div>
+       
+       
+      
+       
+       <div  class="mb-2">
+        <label for="title" class="form-label">Upload Image</label>
+        <input type="file" name="listing[image]" class="form-control" >
+       </div>
+
+       <div class="row">
+
+       <div class="col-md-4 mb-2">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" name="price" value="<%= listingdata.price  %>" class="form-control" required >
+       </div>
+      
+        <div   class="col-md-8 mb-2">
+      <label for="country" class="form-label">Country</label>
+
+            <input type="text" name="country" value="<%= listingdata.country  %>" class="form-control" required >
+        </div>
+       
+
+    </div>
+        <div  class="mb-2">
+
+            <label for="location" class="form-label">Location</label>
+            <input type="text" name="location" value="<%= listingdata.location  %>" class="form-control" required>
+        </div>
+        <br><br>
+      
+        <button class="btn btn-dark">UPDATE</button>
+        <br><br>
+    </form>
+</div>
+</div>
+<script src="/public/js/script.js"></script>
+</body>

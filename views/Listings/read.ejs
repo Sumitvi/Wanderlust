@@ -1,0 +1,133 @@
+<% layout("./layouts/boilerplate.ejs") %>
+
+<style>
+  
+
+
+</style>
+  <body>
+    <!-- <h3>ALL DATA</h3> -->
+
+
+    <div class="row">
+      <h2 class="read-h2">
+        <%=listingdata.title %>
+      </h2>
+      <div class="col-8 offset-2">
+        <div class="card ">
+          <img src="<%= listingdata.image.url  %>" class="card-img-top dont-hover" alt="...">
+          <div class="card-body read-box">
+            <!-- <p class="card-text"><b><%=listingdata.title  %></b></p> -->
+             
+
+        
+  
+          
+            <p class="card-text">
+              <%=listingdata.description %>
+            </p>
+           
+            <p class="card-text">&#x20B9;<%=listingdata.price.toLocaleString("en-IN") %></p>
+            <p class="card-text">
+              <%=listingdata.location %>
+            </p>
+            <p class="card-text">
+              <%=listingdata.country %>
+            </p>
+            <br>
+
+            
+            <div class="row read-btn">
+              <!-- <a href="/listings/<%= listingdata._id  %>/edit" class="btn btn-dark btn-read">Edit</a> -->
+
+              <form action="/listings/<%= listingdata.id  %>?_method=DELETE" method="POST">
+                <a href="/listings/<%= listingdata._id  %>/edit" class="btn btn-dark btn-read">Edit</a>
+                <button class="btn btn-dark">Delete</button>
+              </form>
+
+            </div>
+             <!-- ============================================== -->
+           
+            <!-- <hr>   -->
+          </div>
+
+        </div>
+        <hr>
+
+      </div>
+      <!-- <hr> -->
+    </div>
+
+    <div class="col-8 offset-2 mb-3">
+      <!-- <hr> -->
+
+      <h4>Leave a Review</h4>
+      <form action="/listings/<%= listingdata._id  %>/reviews" method="POST" novalidate class="needs-validation">
+        <div>
+          <label for="rating" class="form-label">Rating</label>
+         
+        </div>
+
+
+      
+        <fieldset class="starability-slot">
+          
+          <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+          <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+        
+
+        <div>
+          <label for="comment" class="form-label">Comment</label>
+          <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
+        </div>
+        
+        <div>
+          <button type="submit" class="black-btn mt-4">Submit</button>
+        </div>
+        <div class="invalid-feedback">Please Submit Some Response</div>
+      </form>
+      <br>
+      <br>
+      <hr>
+      <h3><b>All Reviews</b></h3>
+   
+
+
+      <div class="row">
+         <%  for(let review of listingdata.reviews){ %>
+        
+          <div class="card review-card  border-primary shadow p-3 mb-5 bg-white rounded col-6 text-center ">
+
+            <div class="card-body">
+              <h5 class="card-title">Sumit</h5> 
+              <h5 class="card-text"><%= review.comment  %></h5>
+             
+              <p class="starability-result card-text align-items-center" data-rating="<%= review.rating  %>">
+                Rated: 3 stars
+              </p>
+              <form action="/listings/<%=listingdata._id %>/reviews/<%= review._id  %>  %>?_method=DELETE" method="POSt">
+                <button class="black-btn">Delete</button>
+              </form>
+
+
+            </div>
+
+          </div>
+         <%  } %>
+        </div>
+    </div>
+   
+   
+  </body>
+
+ 
